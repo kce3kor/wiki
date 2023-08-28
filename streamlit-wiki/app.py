@@ -1,24 +1,28 @@
-import streamlit as st
 import numpy as np
-import matplotlib.pyplot as plt
-st.set_option('deprecation.showPyplotGlobalUse', False)
+import streamlit as st
+import matplotlib.pylab as plt
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import AdaBoostRegressor
 
-st.title("Simulation[tm]")
-st.write("One demo simulation")
+n = 1000
+np.random.seed(42)
+x = np.linspace(0, 6, n)
+X = np.linspace(0, 6, n)[:, np.newaxis]
+y = np.sin(X).ravel() + np.sin(6 * X).ravel() + np.random.random(n) * 0.3
 
-st.sidebar.markdown("## Line Plot Demo")
-st.sidebar.markdown("**Hyperparameters**")
+n_est = st.sidebar.slider("n_est", min_value=1, max_value=5_000, step=1)
 
-x = st.sidebar.slider("Slope", min_value = 0.01, max_value = 0.1, step = 0.01)
-y = st.sidebar.slider("Noise", min_value = 0.01, max_value = 0.1, step = 0.01)
+with st.echo():
+    mod1 = DecisionTreeRegressor(max_depth=4)
+    y1 = mod1.fit(X,y).predict(X)
+    y2 = AdaBoostRegressor(mod1, n_estimators=n_est).fit(X, y).predict(X)
 
 
-st.write(f"x={x},  y={y}")
-
-values = np.cumprod(1+np.random.normal(x,y, (100, 10)), axis=0)
-
-for i in range(values.shape[1]):
-    plt.plot(values[:, i])
+if st.sidebar.checkbox("Toggle"):
+    plt.scatter(x, y, alpha=0.1)
+    
+plt.plot(x, y1, label="just a tree")
+plt.plot(x, y2, label=f"adaboost-{n_est}")
+plt.legend()
 
 st.pyplot()
-
