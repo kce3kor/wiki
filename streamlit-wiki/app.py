@@ -6,9 +6,11 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 st.title("Simulation[tm]")
 st.write("One demo simulation")
 
+st.sidebar.markdown("## Line Plot Demo")
+st.sidebar.markdown("**Hyperparameters**")
 
-x = st.slider("Slope", min_value = 0.01, max_value = 0.1, step = 0.01)
-y = st.slider("Noise", min_value = 0.01, max_value = 0.1, step = 0.01)
+x = st.sidebar.slider("Slope", min_value = 0.01, max_value = 0.1, step = 0.01)
+y = st.sidebar.slider("Noise", min_value = 0.01, max_value = 0.1, step = 0.01)
 
 
 st.write(f"x={x},  y={y}")
@@ -19,3 +21,4 @@ for i in range(values.shape[1]):
     plt.plot(values[:, i])
 
 st.pyplot()
+
