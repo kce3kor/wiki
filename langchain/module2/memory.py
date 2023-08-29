@@ -8,7 +8,7 @@ Conversational Buffer Memory and Conversational Chain
 - Conversational Buffer Memory is a stateful object which maintains a history of conversations
 - Providing the entire conversation (large number of tokens), can be expensive as the costings are based on the number of tokens so
 - So, Langchain provides several ways to accumulate and process the memory conversations eg: Conversational BufferWindowMemory
-- 
+- Memory buffer is an important concept
 
 """
 
