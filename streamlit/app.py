@@ -13,10 +13,11 @@ y = np.sin(X).ravel() + np.sin(6 * X).ravel() + np.random.random(n) * 0.3
 
 n_est = st.sidebar.slider("n_est", min_value=1, max_value=5_000, step=1)
 
+
 @st.cache_data
 def make_prediction(n_est):
     mod1 = DecisionTreeRegressor(max_depth=4)
-    y1 = mod1.fit(X,y).predict(X)
+    y1 = mod1.fit(X, y).predict(X)
     y2 = AdaBoostRegressor(mod1, n_estimators=n_est).fit(X, y).predict(X)
     return y1, y2
 

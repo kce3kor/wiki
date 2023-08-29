@@ -8,7 +8,7 @@ Conversational Buffer Memory and Conversational Chain
 - Conversational Buffer Memory is a stateful object which maintains a history of conversations
 - Providing the entire conversation (large number of tokens), can be expensive as the costings are based on the number of tokens so
 - So, Langchain provides several ways to accumulate and process the memory conversations eg: Conversational BufferWindowMemory
-- Memory buffer is an important concept
+- ConversationBufferMemory, ConversationBufferWindowMemory, ConversationTokenBufferMemory, ConversationSummaryMemory
 
 """
 
@@ -18,7 +18,8 @@ import openai
 from dotenv import load_dotenv, find_dotenv
 
 import warnings
-warnings.filterwarnings('ignore')
+
+warnings.filterwarnings("ignore")
 
 load_dotenv(find_dotenv())
 openai.api_key = os.environ["OPENAI_API_KEY"]
@@ -33,11 +34,7 @@ from langchain.memory import ConversationBufferMemory
 llm = ChatOpenAI(temperature=0.0, model=llm_model)
 
 memory = ConversationBufferMemory()
-conversation = ConversationChain(
-    llm=llm, 
-    memory = memory,
-    verbose=True
-)
+conversation = ConversationChain(llm=llm, memory=memory, verbose=True)
 
 print(conversation.predict(input="Hi, my name is Andrew"))
 print(conversation.predict(input="What is 1+1?"))
@@ -49,8 +46,6 @@ print(memory.buffer)
 
 print(memory.load_memory_variables({}))
 
-memory.save_context({"input": "Not much, just hanging"}, 
-                    {"output": "Cool"})
+memory.save_context({"input": "Not much, just hanging"}, {"output": "Cool"})
 
 print(memory.load_memory_variables({}))
-

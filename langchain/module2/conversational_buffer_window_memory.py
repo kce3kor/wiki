@@ -2,7 +2,7 @@
 Conversational Buffer Window Memory
 
 - Only keep a window of the memory specified by k
-- k=1 means only keep one response from the AI and one from the human 
+- k=1 means only keep one response from the AI and one from the human
 
 """
 
@@ -25,22 +25,16 @@ llm = ChatOpenAI(temperature=0.0, model=llm_model)
 
 
 # USE OF THE VALUE k=1
-memory = ConversationBufferWindowMemory(k=1)               
-memory.save_context({"input": "Hi"},
-                    {"output": "What's up"})
-memory.save_context({"input": "Not much, just hanging"},
-                    {"output": "Cool"})
+memory = ConversationBufferWindowMemory(k=1)
+memory.save_context({"input": "Hi"}, {"output": "What's up"})
+memory.save_context({"input": "Not much, just hanging"}, {"output": "Cool"})
 
 print(memory.load_memory_variables({}))
 
 
 llm = ChatOpenAI(temperature=0.0, model=llm_model)
 memory = ConversationBufferWindowMemory(k=1)
-conversation = ConversationChain(
-    llm=llm, 
-    memory = memory,
-    verbose=False
-)
+conversation = ConversationChain(llm=llm, memory=memory, verbose=False)
 print(conversation.predict(input="Hi, my name is Andrew"))
 print(conversation.predict(input="What is 1+1?"))
 
@@ -62,7 +56,7 @@ Some other examples:
                         {"output": "Amazing!"})
     memory.save_context({"input": "Backpropagation is what?"},
                         {"output": "Beautiful!"})
-    memory.save_context({"input": "Chatbots are what?"}, 
+    memory.save_context({"input": "Chatbots are what?"},
                         {"output": "Charming!"})
 
     print(memory.load_memory_variables({}))
@@ -85,14 +79,14 @@ Some other examples:
     memory.save_context({"input": "Hello"}, {"output": "What's up"})
     memory.save_context({"input": "Not much, just hanging"},
                         {"output": "Cool"})
-    memory.save_context({"input": "What is on the schedule today?"}, 
+    memory.save_context({"input": "What is on the schedule today?"},
                         {"output": f"{schedule}"})
 
-    
+
     print(memory.load_memory_variables({}))
 
     conversation = ConversationChain(
-    llm=llm, 
+    llm=llm,
     memory = memory,
     verbose=True
     )

@@ -9,13 +9,14 @@ openai.api_key = os.environ["OPENAI_API_KEY"]
 
 llm_model = "gpt-3.5-turbo-0301"
 
+
 def get_completion(prompt, model=llm_model):
-    message = [{"role":"user", "content":prompt}]
+    message = [{"role": "user", "content": prompt}]
 
     response = openai.ChatCompletion.create(
-        model = model,
-        messages = message,
-        temperature = 0,
+        model=model,
+        messages=message,
+        temperature=0,
     )
     return response.choices[0].message["content"]
 
@@ -36,7 +37,7 @@ in a calm and respectful tone
 """
 
 prompt = f"""Translate the text \
-that is delimited by triple backticks 
+that is delimited by triple backticks
 into a style that is {style}.
 text: ```{customer_email}```
 """

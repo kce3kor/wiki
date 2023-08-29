@@ -1,5 +1,5 @@
 """
-Basic OpenAI API call to chat llm to get the response 
+Basic OpenAI API call to chat llm to get the response
 
 Source: https://learn.deeplearning.ai/langchain/lesson/2/models,-prompts-and-parsers
 
@@ -17,13 +17,12 @@ from langchain.chat_models import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 
 
-
 load_dotenv(find_dotenv())
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
 llm_model = "gpt-3.5-turbo-0301"
 
-chat = ChatOpenAI(temperature=0.0, model = llm_model )
+chat = ChatOpenAI(temperature=0.0, model=llm_model)
 
 print(chat)
 
@@ -50,9 +49,7 @@ cleaning up me kitchen. I need yer help \
 right now, matey!
 """
 
-customer_messages = prompt_template.format_messages(
-                    style=style,
-                    text=customer_email)
+customer_messages = prompt_template.format_messages(style=style, text=customer_email)
 
 print(type(customer_messages))
 print(type(customer_messages[0]))
@@ -77,8 +74,8 @@ a polite tone \
 that speaks in English Pirate\
 """
 service_messages = prompt_template.format_messages(
-    style=service_style_pirate,
-    text=service_reply)
+    style=service_style_pirate, text=service_reply
+)
 print(service_messages[0].content)
 
 service_response = chat(service_messages)
